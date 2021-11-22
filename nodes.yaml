@@ -1,0 +1,19 @@
+
+nodes:
+  - name: "rtr-01"
+    interfaces:
+    - name: "gigatbitethernet 0/1"
+      state: "enabled"
+      ip: "10.1.1.1"
+      mask: "255.255.255.250"
+    - name: "gigatbitethernet 0/2"
+      state: "enabled"
+      ip: "10.2.1.1"
+      mask: "255.255.255.250"
+    ospf_id: "100"
+    ospf_networks:
+    - ip: "10.1.1.0"
+      mask: "0.0.0.7"
+    - ip: "10.2.1.0"
+      mask: "0.0.0.7"
+  - name: "rtr-02"  

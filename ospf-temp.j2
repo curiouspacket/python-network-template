@@ -1,0 +1,18 @@
+{%for node in nodes%}
+hostname {{node.name}}
+{%for int in node.interfaces -%}
+interface {{int.name}}
+  ip address {{int.ip}} {{int.mask}}
+  {% if int.state == "enabled" -%}
+  no shutdown
+  {% else -%}
+  shutdown
+  {% endif -%}
+  !
+{% endfor -%}
+!
+router ospf {{node.ospf_id}}
+{% for net in node.ospf_networks -%}
+    network {{net.ip}} {{net.mask}} area 0
+{% endfor %}
+{% endfor %}
