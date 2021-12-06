@@ -1,4 +1,6 @@
 
+#This is parent class that creates a Router Object
+#Every Router has managementip, hostname and serialnumber
 class Router:
     device = "Router"
     def __init__(self, mgmtip, hostname, serialnum):
@@ -11,7 +13,8 @@ class Router:
                   "management-ip" : self.mgmtip,
                   "serial-number": self.serialnum}
         return device
-
+# Routing Class inherits from Router Class
+#takes values for subnets to be included in routing
 class Routing(Router):
     def __init__(self, mgmtip, hostname, serialnum, nets):
         super().__init__(mgmtip, hostname, serialnum)
