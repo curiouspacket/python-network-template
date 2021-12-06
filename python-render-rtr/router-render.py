@@ -13,9 +13,12 @@ class Router:
         return device
 
 class Routing(Router):
-    def router_bgp(self, nets):
+    def __init__(self, mgmtip, hostname, serialnum, nets):
+        super().__init__(mgmtip, hostname, serialnum)
+        self.nets = nets
+    def router_bgp(self):
         #print(nets)
-        return f"RouterID:{self.mgmtip}, advertises these subnets {nets}"
+        return f"RouterID:{self.mgmtip}, advertises these subnets {self.nets}"
 
 cnt =4
 i=0
@@ -25,8 +28,13 @@ while i<cnt:
     ip =  "10.100.1." + str(i+1)
     ser = str(i+1)
     nets = ["10.20."+str(i+1)+".0"]
-    create = Routing( ip, rtr,ser)
-    print(create.router_bgp(nets))
+    create = Router( ip, rtr,ser)
     routers.append(create.router_info())
     i= i + 1
 print(routers)
+
+subs = ['10.10.1.0', "10.10.2.0", "10.10.3.0"]
+rtr1 = Routing("10.10.1.1", "rtr1", "000000000001", subs)
+print(rtr1.router_bgp())
+print(rtr1.router_info())
+
